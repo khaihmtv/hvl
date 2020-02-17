@@ -4,9 +4,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser=require('body-parser')
 const cors = require('cors')
 const path=require('path')
+require('dotenv').config()
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 const SECRET = 'shhh';
 
 //app.use(express.json()) // for parsing application/json

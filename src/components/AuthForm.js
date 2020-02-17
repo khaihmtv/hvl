@@ -150,7 +150,7 @@ AuthForm.defaultProps = {
 };
 
 const AuthForma=(props)=>{
-  const [isLogin,setIsLogin]=React.useState(true)
+  const [isLogin,setIsLogin]=React.useState(props.isLogin)
   const [email,setEmail]=React.useState('')
   const [pass,setPass]=React.useState('')
   const [repass,setRepass]=React.useState('')
