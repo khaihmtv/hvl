@@ -96,11 +96,11 @@ class AuthForm extends React.Component {
           <h6>or</h6>
           <h6>
             {this.isSignup ? (
-              <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
+              <a onClick={this.changeAuthState(STATE_LOGIN)}>
                 Login
               </a>
             ) : (
-              <a href="#signup" onClick={this.changeAuthState(STATE_SIGNUP)}>
+              <a onClick={this.changeAuthState(STATE_SIGNUP)}>
                 Signup
               </a>
             )}
