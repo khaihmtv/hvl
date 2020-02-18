@@ -1,7 +1,10 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label ,Alert,
+  Card,
+  CardBody,
+  CardHeader,} from 'reactstrap';
 
 class AuthForm extends React.Component {
   get isLogin() {
@@ -130,7 +133,7 @@ AuthForm.propTypes = {
 
 AuthForm.defaultProps = {
   authState: 'LOGIN',
-  showLogo: false,
+  showLogo: true,
   usernameLabel: 'Email',
   usernameInputProps: {
     type: 'email',
@@ -154,11 +157,50 @@ const AuthForma=(props)=>{
   const [email,setEmail]=React.useState('')
   const [pass,setPass]=React.useState('')
   const [repass,setRepass]=React.useState('')
+  
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(`email :${email}, pass ${pass}, repass ${repass}`)
+    if(isLogin){
+      let url = `http://${process.env.PUBLIC_URL}/auth/login`;
+      let options = {
+          method: 'POST',
+          body: JSON.stringify({email: email, pass: pass}),
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          },
+          crendentials: 'include'
+      }
+
+      window.fetch(url, options)
+      .then(r=>r.json())
+      .then(data => {
+          alert(data)
+      })
+      .catch(console.error)
+      }
+    if(!isLogin){
+      const url = `http://${process.env.PUBLIC_URL}/auth/register`;
+      const options = {
+          method: 'POST',
+          body: JSON.stringify({email: email, pass: pass, repass:repass}),
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          },
+          crendentials: 'include'
+      }
+
+      window.fetch(url, options)
+      .then(r=>r.json())
+      .then(data => {
+          alert(data)
+      })
+      .catch(console.error)
+    }
   };
   return (
+    
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Label for='Email'>Email</Label>
@@ -187,11 +229,11 @@ const AuthForma=(props)=>{
         <h6>or</h6>
         <h6>
           {!isLogin ? (
-            <a href="#login" onClick={()=>{setIsLogin(!isLogin)}}>
+            <a onClick={()=>{setIsLogin(!isLogin)}}>
               Đăng Nhập
             </a>
           ) : (
-            <a href="#sigup" onClick={()=>{setIsLogin(!isLogin)}}>
+            <a onClick={()=>{setIsLogin(!isLogin)}}>
               Đăng Ký
             </a>
           )}
