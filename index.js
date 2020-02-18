@@ -12,7 +12,7 @@ const port = process.env.PORT;
 const SECRET = 'shhh';
 
 
-mongoose.connect(`mongodb://${process.env.PUBLIC_URL}/hvl`, {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(`mongodb://localhost/hvl`, {useNewUrlParser: true,useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

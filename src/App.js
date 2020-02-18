@@ -36,7 +36,7 @@ class App extends React.Component {
           <Switch>
             <LayoutRoute
               exact
-              path="/"
+              path="/login"
               layout={EmptyLayout}
               component={props => (
                 <AuthPage {...props} isLogin={true} />
@@ -50,7 +50,7 @@ class App extends React.Component {
                 <AuthPage {...props} isLogin={false}/>
               )}
             />
-{/*
+
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/home" component={DashboardPage} />
@@ -75,8 +75,7 @@ class App extends React.Component {
                 <Route exact path="/charts" component={ChartPage} />
               </React.Suspense>
             </MainLayout>
-            <Redirect to="/home" />
-            */}
+            <Redirect to="/" />
           </Switch>
       </BrowserRouter>
     );
