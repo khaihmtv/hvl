@@ -1,10 +1,7 @@
 import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Form, FormGroup, Input, Label ,Alert,
-  Card,
-  CardBody,
-  CardHeader,} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
 class AuthForm extends React.Component {
   get isLogin() {
@@ -99,11 +96,11 @@ class AuthForm extends React.Component {
           <h6>or</h6>
           <h6>
             {this.isSignup ? (
-              <a onClick={this.changeAuthState(STATE_LOGIN)}>
+              <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
                 Login
               </a>
             ) : (
-              <a onClick={this.changeAuthState(STATE_SIGNUP)}>
+              <a href="#signup" onClick={this.changeAuthState(STATE_SIGNUP)}>
                 Signup
               </a>
             )}
@@ -133,7 +130,7 @@ AuthForm.propTypes = {
 
 AuthForm.defaultProps = {
   authState: 'LOGIN',
-  showLogo: true,
+  showLogo: false,
   usernameLabel: 'Email',
   usernameInputProps: {
     type: 'email',
@@ -153,54 +150,15 @@ AuthForm.defaultProps = {
 };
 
 const AuthForma=(props)=>{
-  const [isLogin,setIsLogin]=React.useState(props.isLogin)
+  const [isLogin,setIsLogin]=React.useState(true)
   const [email,setEmail]=React.useState('')
   const [pass,setPass]=React.useState('')
   const [repass,setRepass]=React.useState('')
-  
   const handleSubmit = event => {
     event.preventDefault();
-    if(isLogin){
-      let url = `http://${process.env.PUBLIC_URL}/auth/login`;
-      let options = {
-          method: 'POST',
-          body: JSON.stringify({email: email, pass: pass}),
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-          },
-          crendentials: 'include'
-      }
-
-      window.fetch(url, options)
-      .then(r=>r.json())
-      .then(data => {
-          alert(data)
-      })
-      .catch(console.error)
-      }
-    if(!isLogin){
-      const url = `http://${process.env.PUBLIC_URL}/auth/register`;
-      const options = {
-          method: 'POST',
-          body: JSON.stringify({email: email, pass: pass, repass:repass}),
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-          },
-          crendentials: 'include'
-      }
-
-      window.fetch(url, options)
-      .then(r=>r.json())
-      .then(data => {
-          alert(data)
-      })
-      .catch(console.error)
-    }
+    console.log(`email :${email}, pass ${pass}, repass ${repass}`)
   };
   return (
-    
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Label for='Email'>Email</Label>
@@ -229,11 +187,11 @@ const AuthForma=(props)=>{
         <h6>or</h6>
         <h6>
           {!isLogin ? (
-            <a onClick={()=>{setIsLogin(!isLogin)}}>
+            <a href="#login" onClick={()=>{setIsLogin(!isLogin)}}>
               Đăng Nhập
             </a>
           ) : (
-            <a onClick={()=>{setIsLogin(!isLogin)}}>
+            <a href="#sigup" onClick={()=>{setIsLogin(!isLogin)}}>
               Đăng Ký
             </a>
           )}

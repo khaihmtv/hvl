@@ -3,8 +3,8 @@ import React from 'react';
 import { Card, Col, Row } from 'reactstrap';
 
 class AuthPage extends React.Component {
-  handleAuthState = Logined => {
-    if (Logined=== true) {
+  handleAuthState = authState => {
+    if (authState === STATE_LOGIN) {
       this.props.history.push('/');
     } else {
       this.props.history.push('/signup');
@@ -26,7 +26,9 @@ class AuthPage extends React.Component {
         <Col md={6} lg={4}>
           <Card body>
             <AuthForm
-              isLogin={this.props.isLogin}
+              authState={this.props.authState}
+              onChangeAuthState={this.handleAuthState}
+              onLogoClick={this.handleLogoClick}
             />
           </Card>
         </Col>

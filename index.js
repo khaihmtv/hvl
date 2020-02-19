@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const bodyParser=require('body-parser')
-const cors = require('cors')
 const path=require('path')
 require('dotenv').config()
 const mongoose = require('mongoose');
@@ -24,7 +23,6 @@ const User=require('./User')
 app.use(cookieParser()) //cookie-parser dùng để đọc cookies của request:
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
 
 app.post('/auth/login', (req, res) => {
     const email = req.body.email;
